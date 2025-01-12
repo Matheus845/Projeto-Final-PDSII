@@ -22,10 +22,6 @@ public:
     void setNome(const std::string& nome);
     void setEmail(const std::string& email);
     void setSenha(const std::string& senha);
-    void setVitorias(int vitorias);
-    void setDerrotas(int derrotas);
-
-    // Métodos para atualizar estatísticas
     void incrementarVitorias();
     void incrementarDerrotas();
 

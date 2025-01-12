@@ -38,4 +38,9 @@ private:
     int derrotas;
 };
 
+void listarJogadores(const std::unordered_map<std::string, Jogador>& jogadores);
+
+void registrarResultado(std::unordered_map<std::string, Jogador>& jogadores,
+                        const std::string& vencedor, const std::string& perdedor);
+
 #endif 

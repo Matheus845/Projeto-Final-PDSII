@@ -19,6 +19,8 @@ int main() {
         std::cout << "  1 - Cadastrar um novo jogador.\n";
         std::cout << "  2 - Remover um jogador.\n";
         std::cout << "  3 - Sair do sistema.\n";
+        std::cout << "  4 - Registrar resultado da partida.\n";
+        std::cout << "  5 - Listar jogadores.\n";
 
         std::cout << "Digite a opção desejada: ";
         std::getline(std::cin, entrada);
@@ -87,6 +89,19 @@ int main() {
                 jogadores.erase(apelido);
                 std::cout << "Jogador " << apelido << " removido com sucesso\n";
             }
+
+        } else if (entrada == "5") { // Listar jogadores
+            listarJogadores(jogadores);
+        } else if (entrada == "4") { // Registrar resultado de partida
+            std::cout << "Digite o apelido do vencedor: ";
+            std::string vencedor;
+            std::getline(std::cin, vencedor);
+
+            std::cout << "Digite o apelido do perdedor: ";
+            std::string perdedor;
+            std::getline(std::cin, perdedor);
+
+            registrarResultado(jogadores, vencedor, perdedor);
         } else if (entrada == "0") { // Entrar no sistema
             std::cout << "Digite o apelido: ";
             std::string apelido;

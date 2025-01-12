@@ -1,7 +1,7 @@
 #include "jogador.hpp"
 
 // Construtor padrão
-Jogador::Jogador() : apelido(""), nome(""), email(""), senha("") {}
+Jogador::Jogador() : apelido(""), nome(""), email(""), senha(""), vitorias(0), derrotas(0) {}
 
 // Construtor parametrizado
 Jogador::Jogador(const std::string& apelido, const std::string& nome, const std::string& email, const std::string& senha)
@@ -49,19 +49,35 @@ void Jogador::setSenha(const std::string& senha) {
     this->senha = senha;
 }
 
-void Jogador::setVitorias(int vitorias) {
-    this->vitorias = vitorias;
-}
-
-void Jogador::setDerrotas(int derrotas) {
-    this->derrotas = derrotas;
-}
-
-// Métodos para atualizar estatísticas
 void Jogador::incrementarVitorias() {
     vitorias++;
 }
 
 void Jogador::incrementarDerrotas() {
     derrotas++;
+}
+
+void listarJogadores(const std::unordered_map<std::string, Jogador>& jogadores) {
+    if (jogadores.empty()) {
+        std::cout << "Nenhum jogador cadastrado.\n";
+        return;
+    }
+
+    std::cout << "Jogadores cadastrados:\n";
+    for (const auto& [apelido, jogador] : jogadores) {
+        std::cout << "Apelido: " << apelido << ", Nome: " << jogador.getNome()
+                  << ", Vitórias: " << jogador.getVitorias()
+                  << ", Derrotas: " << jogador.getDerrotas() << "\n";
+    }
+}
+
+void registrarResultado(std::unordered_map<std::string, Jogador>& jogadores,
+                        const std::string& vencedor, const std::string& perdedor) {
+    if (jogadores.find(vencedor) != jogadores.end() && jogadores.find(perdedor) != jogadores.end()) {
+        jogadores[vencedor].incrementarVitorias();
+        jogadores[perdedor].incrementarDerrotas();
+        std::cout << "Resultado registrado: " << vencedor << " venceu, " << perdedor << " perdeu.\n";
+    } else {
+        std::cout << "ERRO: Um ou ambos os jogadores não foram encontrados.\n";
+    }
 }
